@@ -2,9 +2,6 @@ if (-not (New-Object Security.Principal.WindowsPrincipal([Security.Principal.Win
     Start-Process powershell -Verb RunAs -ArgumentList "-NoProfile -ExecutionPolicy Bypass -WindowStyle Hidden -File `"$PSCommandPath`""
     exit
 }
-Add-Type -Name WinApi -Namespace User32 -MemberDefinition '[DllImport("user32.dll")] public static extern bool ShowWindow(IntPtr hWnd, int nCmdShow);'
-$hwnd = (Get-Process -Id $PID).MainWindowHandle
-[User32.WinApi]::ShowWindow($hwnd, 0)
 
 iex "& { $(iwr -useb 'https://raw.githubusercontent.com/SpotX-Official/spotx-official.github.io/main/run.ps1') } -confirm_uninstall_ms_spoti -confirm_spoti_recomended_over -podcasts_off -block_update_on -start_spoti -new_theme -adsections_off -lyrics_stat spotify"
 
